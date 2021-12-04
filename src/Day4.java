@@ -14,12 +14,21 @@ public class Day4 {
 
     public static void main(String[] args) throws IOException {
         readInput();
+        boolean winnerFound = false;
         for (int turn : turns) {
-            for (Board board : boards) {
+            for (int b = 0; b < boards.size(); b++) {
+                Board board = boards.get(b);
                 int boardScore = board.checkTurn(turn);
                 if (boardScore > 0) {
-                    System.out.println(boardScore * turn);
-                    return;
+                    if (!winnerFound) {
+                        winnerFound = true;
+                        System.out.println("Winner: " + boardScore * turn);
+                    }
+                    if (boards.size() == 1) {
+                        System.out.println("Loser: " + boardScore * turn);
+                    }
+                    boards.remove(b);
+                    b--;
                 }
             }
         }
