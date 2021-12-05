@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class Day4 {
 
-    private final static String INPUT_FILE = "day4.txt";
+    private static final String INPUT_FILE = "day4.txt";
     private static final List<Board> boards = new ArrayList<>();
     private static List<Integer> turns = new ArrayList<>();
 
