@@ -28,8 +28,7 @@ public class Day6 {
     }
 
     private static long getTotalSpawns() {
-        int daysRemaining = NUM_DAYS;
-        while (daysRemaining > 0) {
+        for (int daysRemaining = NUM_DAYS; daysRemaining > 0; daysRemaining--) {
             long[] newSpawns = new long[9];
             for (int i = spawns.length - 1; i >= 0; i--) {
                 long numSpawns = spawns[i];
@@ -41,7 +40,6 @@ public class Day6 {
                 }
             }
             spawns = newSpawns.clone();
-            daysRemaining--;
         }
         return Arrays.stream(spawns).sum();
     }
