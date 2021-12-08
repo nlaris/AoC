@@ -45,6 +45,8 @@ public class Day8 {
             String[] outputs = numberOutputs.get(i).split(" ");
             String joinedInputs = String.join("", inputs);
             final Map<Character, Character> solution = new HashMap<>();
+
+            // deduce each letter's real value
             for (char c = 'a'; c <= 'g'; c++) {
                 char finalC = c;
                 int letterCount = (int) joinedInputs.chars().filter(ch -> ch == finalC).count();
@@ -69,6 +71,8 @@ public class Day8 {
                     }
                 }
             }
+
+            // build output for this row
             StringBuilder result = new StringBuilder();
             for (String output : outputs) {
                 StringBuilder actualOutput = new StringBuilder();
