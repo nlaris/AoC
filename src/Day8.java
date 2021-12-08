@@ -23,12 +23,10 @@ public class Day8 {
         put("abcdefg", 8);
         put("abcdfg", 9);
     }};
-    private static final Map<Integer, char[]> NUM_OCCURENCES = new HashMap<>() {{
-        put(4, new char[]{'e'});
-        put(6, new char[]{'b'});
-        put(7, new char[]{'d', 'g'});
-        put(8, new char[]{'a', 'c'});
-        put(9, new char[]{'f'});
+    private static final Map<Integer, Character> NUM_OCCURENCES = new HashMap<>() {{
+        put(4, 'e');
+        put(6, 'b');
+        put(9, 'f');
     }};
 
     public static void main(String[] args) throws IOException {
@@ -40,8 +38,7 @@ public class Day8 {
 
         int part2Total = 0;
         for (int i = 0; i < numberInputs.size(); i++) {
-            String[] inputs = Arrays.stream(numberInputs.get(i).split(" "))
-                    .sorted(new SortByStringSize()).toArray(String[]::new);
+            String[] inputs = Arrays.stream(numberInputs.get(i).split(" ")).sorted(new SortByStringSize()).toArray(String[]::new);
             String[] outputs = numberOutputs.get(i).split(" ");
             String joinedInputs = String.join("", inputs);
             final Map<Character, Character> solution = new HashMap<>();
@@ -50,9 +47,9 @@ public class Day8 {
             for (char c = 'a'; c <= 'g'; c++) {
                 char finalC = c;
                 int letterCount = (int) joinedInputs.chars().filter(ch -> ch == finalC).count();
-                char[] possibilities = NUM_OCCURENCES.get(letterCount);
-                if (possibilities.length == 1) {
-                    solution.put(c, possibilities[0]);
+                Character possibility = NUM_OCCURENCES.get(letterCount);
+                if (possibility != null) {
+                    solution.put(c, possibility);
                 } else {
                     if (letterCount == 7) {
                         // inputs[2] represents the digital `4`
