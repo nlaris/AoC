@@ -47,9 +47,9 @@ public class Day8 {
             for (char c = 'a'; c <= 'g'; c++) {
                 char finalC = c;
                 int letterCount = (int) joinedInputs.chars().filter(ch -> ch == finalC).count();
-                Character possibility = NUM_OCCURENCES.get(letterCount);
-                if (possibility != null) {
-                    solution.put(c, possibility);
+                Character mapping = NUM_OCCURENCES.get(letterCount);
+                if (mapping != null) {
+                    solution.put(c, mapping);
                 } else {
                     if (letterCount == 7) {
                         // inputs[2] represents the digital `4`
