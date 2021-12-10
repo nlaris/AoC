@@ -49,7 +49,6 @@ public class Day10 {
         long incompleteScore = 0;
         for(int i = expected.size() - 1; i >= 0; i--) {
             incompleteScore = (incompleteScore * 5) + braceScores.get(expected.get(i))[1];
-
         }
         incompleteRowScores.add(incompleteScore);
     }
