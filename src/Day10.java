@@ -14,17 +14,11 @@ public class Day10 {
         put('(', ')');
         put('{', '}');
     }};
-    private static final HashMap<Character, Integer> braceScoresPt1 = new HashMap<>() {{
-        put(')', 3);
-        put(']', 57);
-        put('}', 1197);
-        put('>', 25137);
-    }};
-    private static final HashMap<Character, Integer> braceScoresPt2 = new HashMap<>() {{
-        put(')', 1);
-        put(']', 2);
-        put('}', 3);
-        put('>', 4);
+    private static final HashMap<Character, int[]> braceScores = new HashMap<>() {{
+        put(')', new int[]{3, 1});
+        put(']', new int[]{57, 2});
+        put('}', new int[]{1197, 3});
+        put('>', new int[]{25137, 4});
     }};
     private static final ArrayList<Long> incompleteRowScores = new ArrayList<>();
     private static int part1Score = 0;
@@ -46,7 +40,7 @@ public class Day10 {
                     expected.remove(expected.size() - 1);
                 } else {
                     // found a corrupt character
-                    part1Score += braceScoresPt1.get(c);
+                    part1Score += braceScores.get(c)[0];
                     return;
                 }
             }
@@ -54,7 +48,7 @@ public class Day10 {
         // no corrupt characters, but may be incomplete
         long incompleteScore = 0;
         for(int i = expected.size() - 1; i >= 0; i--) {
-            incompleteScore = (incompleteScore * 5) + braceScoresPt2.get(expected.get(i));
+            incompleteScore = (incompleteScore * 5) + braceScores.get(expected.get(i))[1];
 
         }
         incompleteRowScores.add(incompleteScore);
