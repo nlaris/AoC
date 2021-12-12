@@ -44,11 +44,7 @@ public class Day12 {
 
     private static void addMapping(final String from, final String to) {
         if (to.equals("start")) return;
-        ArrayList<String> toPoints = mappings.get(from);
-        if (toPoints == null) {
-            toPoints = new ArrayList<>();
-        }
-        toPoints.add(to);
-        mappings.put(from, toPoints);
+        mappings.computeIfAbsent(from, k -> new ArrayList<>());
+        mappings.get(from).add(to);
     }
 }
