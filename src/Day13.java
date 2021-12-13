@@ -16,11 +16,7 @@ public class Day13 {
             foldPaper(fold);
             if (firstFold) {
                 firstFold = false;
-                int sum = 0;
-                for ( Map.Entry<Integer, Set<Integer>> entry : dots.entrySet()) {
-                    sum += entry.getValue().size();
-                }
-                System.out.println("Part 1: " + sum);
+                System.out.println("Part 1: " + dots.values().stream().mapToInt(Set::size).sum());
             }
         }
         System.out.println("Part 2: ");
