@@ -13,27 +13,7 @@ public class Day13 {
         readInput();
         boolean firstFold = true;
         for (String fold : folds) {
-            final String[] instructions = fold.split("=");
-            final int foldLoc = Integer.parseInt(instructions[1]);
-            if (instructions[0].equals("x")) {
-                for ( Map.Entry<Integer, Set<Integer>> entry : dots.entrySet()) {
-                    for (int dot : entry.getValue().stream().filter(y -> y > foldLoc).toList()) {
-                        final int newDotLoc = foldLoc * 2 - dot;
-                        entry.getValue().remove(dot);
-                        entry.getValue().add(newDotLoc);
-                    }
-                    entry.getValue().remove(foldLoc);
-                }
-            } else {
-                for ( Map.Entry<Integer, Set<Integer>> entry : dots.entrySet().stream().filter(x -> x.getKey() > foldLoc).toList()) {
-                    for (int dot : entry.getValue()) {
-                        final int newDotLoc = foldLoc * 2 - entry.getKey();
-                        dots.computeIfAbsent(newDotLoc, k -> new HashSet<>());
-                        dots.get(newDotLoc).add(dot);
-                    }
-                    dots.remove(entry.getKey());
-                }
-            }
+            foldPaper(fold);
             if (firstFold) {
                 firstFold = false;
                 int sum = 0;
@@ -45,6 +25,30 @@ public class Day13 {
         }
         System.out.println("Part 2: ");
         printCode();
+    }
+
+    private static void foldPaper(final String fold) {
+        final String[] instructions = fold.split("=");
+        final int foldLoc = Integer.parseInt(instructions[1]);
+        if (instructions[0].equals("x")) {
+            for ( Map.Entry<Integer, Set<Integer>> entry : dots.entrySet()) {
+                for (int dot : entry.getValue().stream().filter(y -> y > foldLoc).toList()) {
+                    final int newDotLoc = foldLoc * 2 - dot;
+                    entry.getValue().remove(dot);
+                    entry.getValue().add(newDotLoc);
+                }
+                entry.getValue().remove(foldLoc);
+            }
+        } else {
+            for ( Map.Entry<Integer, Set<Integer>> entry : dots.entrySet().stream().filter(x -> x.getKey() > foldLoc).toList()) {
+                for (int dot : entry.getValue()) {
+                    final int newDotLoc = foldLoc * 2 - entry.getKey();
+                    dots.computeIfAbsent(newDotLoc, k -> new HashSet<>());
+                    dots.get(newDotLoc).add(dot);
+                }
+                dots.remove(entry.getKey());
+            }
+        }
     }
 
     private static void printCode() {
