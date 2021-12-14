@@ -8,14 +8,16 @@ public class Day5 {
 
     private static final String INPUT_FILE = "day5.txt";
     private static final HashMap<String, Integer> spots = new HashMap<>();
-    private static final boolean INCLUDE_DIAGONALS = true;
 
     public static void main(String[] args) throws IOException {
-        readInput();
-        System.out.print(spots.entrySet().stream().filter(map -> map.getValue() > 1).toList().size());
+        readInput(false);
+        System.out.println("Part 1: " + spots.entrySet().stream().filter(map -> map.getValue() > 1).toList().size());
+        readInput(true);
+        System.out.println("Part 2: " + spots.entrySet().stream().filter(map -> map.getValue() > 1).toList().size());
     }
 
-    private static void readInput() throws IOException {
+    private static void readInput(final boolean includeDiagonals) throws IOException {
+        spots.clear();
         try (BufferedReader br = new BufferedReader(new FileReader(INPUT_FILE))) {
             String line = br.readLine();
             while (line != null) {
@@ -24,7 +26,7 @@ public class Day5 {
                 final Integer[] end = Arrays.stream(coords[1].split(",")).map(Integer::parseInt).toArray(Integer[]::new);
                 final int xOffset = end[0].compareTo(begin[0]);
                 final int yOffset = end[1].compareTo(begin[1]);
-                if (INCLUDE_DIAGONALS || xOffset == 0 || yOffset == 0) {
+                if (includeDiagonals || xOffset == 0 || yOffset == 0) {
                     int currentX = begin[0], currentY = begin[1];
                     final String endSpot = buildIndex(end[0], end[1]);
                     String currentSpot = buildIndex(currentX, currentY);

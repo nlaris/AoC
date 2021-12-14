@@ -22,10 +22,10 @@ public class Day4 {
                 if (boardScore > 0) {
                     if (!winnerFound) {
                         winnerFound = true;
-                        System.out.println("Winner: " + boardScore * turn);
+                        System.out.println("Part 1: " + boardScore * turn);
                     }
                     if (boards.size() == 1) {
-                        System.out.println("Loser: " + boardScore * turn);
+                        System.out.println("Part 2: " + boardScore * turn);
                     }
                     boards.remove(b);
                     b--;

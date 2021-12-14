@@ -16,7 +16,7 @@ public class Day6 {
         for(Integer spawn : initialSpawns) {
             spawns[spawn]++;
         }
-        System.out.println(getTotalSpawns());
+        simulateDays();
     }
 
     private static void readInput() throws IOException {
@@ -27,8 +27,8 @@ public class Day6 {
         }
     }
 
-    private static long getTotalSpawns() {
-        for (int daysRemaining = NUM_DAYS; daysRemaining > 0; daysRemaining--) {
+    private static void simulateDays() {
+        for (int day = 1; day <= NUM_DAYS; day++) {
             long[] newSpawns = new long[9];
             for (int i = spawns.length - 1; i >= 0; i--) {
                 long numSpawns = spawns[i];
@@ -40,7 +40,10 @@ public class Day6 {
                 }
             }
             spawns = newSpawns.clone();
+            if (day == 80) {
+                System.out.println("Part 1: " + Arrays.stream(spawns).sum());
+            }
         }
-        return Arrays.stream(spawns).sum();
+        System.out.println("Part 2: " + Arrays.stream(spawns).sum());
     }
 }
